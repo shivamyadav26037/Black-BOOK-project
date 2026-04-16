@@ -10,8 +10,8 @@ encoders = joblib.load("encoders_inr.pkl")
 
 st.set_page_config(page_title="Movie Success Predictor", layout="centered")
 
-st.title("🎬 Movie Success Predictor")
-st.write("AI Prediction + Real-world Business Analysis")
+st.title(" Movie Success Predictor")
+st.write("Model Prediction + Real-world Business Analysis")
 
 # ==============================
 # INPUTS
@@ -69,19 +69,19 @@ input_data = np.array([[input_dict[col] for col in feature_order]])
 # ==============================
 if st.button("Predict"):
 
-    # 🤖 MODEL
+    #  MODEL
     prediction = model.predict(input_data)[0]
     probability = model.predict_proba(input_data)[0][prediction]
 
-    st.subheader("🤖 AI Model Prediction")
+    st.subheader(" AI Model Prediction")
 
     if prediction == 1:
-        st.success(f"HIT 🎯 (Confidence: {probability*100:.2f}%)")
+        st.success(f"HIT  (Confidence: {probability*100:.2f}%)")
     else:
-        st.error(f"FLOP ❌ (Confidence: {probability*100:.2f}%)")
+        st.error(f"FLOP  (Confidence: {probability*100:.2f}%)")
 
     # ==============================
-    # 💰 BUSINESS CALCULATION
+    #  BUSINESS CALCULATION
     # ==============================
     days = weeks * 7
 
@@ -92,7 +92,7 @@ if st.button("Predict"):
     revenue = (tickets_sold * ticket_price) / 10000000  # ₹ Crore
     total_cost = budget + marketing_budget
 
-    st.subheader("💰 Business Analysis")
+    st.subheader(" Business Analysis")
 
     st.write(f"Estimated Revenue: ₹{revenue:.2f} Cr")
     st.write(f"Total Cost: ₹{total_cost:.2f} Cr")
@@ -100,23 +100,23 @@ if st.button("Predict"):
     # ==============================
     # FINAL VERDICT
     # ==============================
-    st.subheader("📊 Business Verdict")
+    st.subheader(" Business Verdict")
 
     if revenue >= 1.5 * budget:
-        st.success("🔥 HIT")
+        st.success(" HIT")
     elif revenue >= budget:
-        st.warning("⚖️ AVERAGE")
+        st.warning(" AVERAGE")
     else:
-        st.error("❌ FLOP")
+        st.error(" FLOP")
 
-    # ==============================
+    
     # COMPARISON
-    # ==============================
-    st.subheader("⚠️ AI vs Business")
+    
+    st.subheader(" Model vs Business")
 
     if prediction == 1 and revenue < budget:
-        st.warning("AI says HIT but business shows FLOP ⚠️")
+        st.warning("Model says HIT but business shows FLOP ")
     elif prediction == 0 and revenue >= budget:
-        st.warning("AI says FLOP but business looks good ⚠️")
+        st.warning("Model says FLOP but business looks good ")
     else:
-        st.success("AI & Business agree ✅")
+        st.success("Model & Business agree ")
